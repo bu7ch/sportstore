@@ -11,10 +11,10 @@ export class StoreComponent implements OnInit {
   constructor(private repository: ProductRepository) {}
 
   ngOnInit(): void {}
-  get_products(): Product[] {
+  get products(): Product[] {
     return this.repository.getProducts();
   }
-  get_categories(): string[] {
+  get categories(): string[] {
     return this.repository.getCategories();
   }
 }
