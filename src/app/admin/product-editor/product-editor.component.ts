@@ -1,15 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductRepository } from 'src/app/model/product.repository';
+import { Product } from 'src/app/model/product.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-product-editor',
   templateUrl: './product-editor.component.html',
-  styleUrls: ['./product-editor.component.css']
+  styleUrls: ['./product-editor.component.css'],
 })
 export class ProductEditorComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  editing: boolean = false;
+  product: Product = new Product();
+  constructor(
+    private repository: ProductRepository,
+    private router: Router,
+    activeRoute: ActivatedRoute
+  ) {
+    this.editing = activeRoute.snapshot.params['mode'] == 'edit';
+    if (this.editing) {
+      Object.assign(
+        this.product,
+        repository.getProduct(activeRoute.snapshot.params['id'])
+      );
+    }
+  }
+  save(form: NgForm) {
+    this.repository.saveProduct(this.product);
+    this.router.navigateByUrl('/admin/main/products');
   }
 
+  ngOnInit(): void {}
 }

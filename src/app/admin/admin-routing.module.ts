@@ -11,10 +11,10 @@ const routes: Routes = [
   { path:'auth', component:AuthComponent },
   { path:'main', component:AdminComponent, canActivate:[AuthGuard],
   children: [
-    {path:'/products/:mode/:id', component:ProductEditorComponent},
-    {path:'/products/:mode/', component:ProductEditorComponent},
-    {path:'/products', component:ProductTableComponent},
-    {path:'/orders', component:OrderTableComponent},
+    {path:'products/:mode/:id', component:ProductEditorComponent},
+    {path:'products/:mode', component:ProductEditorComponent},
+    {path:'products', component:ProductTableComponent},
+    {path:'orders', component:OrderTableComponent},
     { path:'**', redirectTo: "products" },
   ]
  },

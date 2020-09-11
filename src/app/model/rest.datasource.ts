@@ -41,7 +41,7 @@ export class RestDataSource {
   }
   updateProduct(product: Product): Observable<Product> {
     return this.http.put<Product>(
-      `${this.baseUrl}/products/${product.id}`,
+      `${this.baseUrl}products/${product.id}`,
       product,
       this.getOptions()
     );
